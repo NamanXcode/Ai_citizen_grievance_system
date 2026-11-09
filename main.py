@@ -543,6 +543,14 @@ if os.path.exists(frontend_dir):
 if os.path.exists(officer_frontend_dir):
     app.mount("/officer", StaticFiles(directory=officer_frontend_dir, html=True), name="officer")
 
+@app.get("/officer", include_in_schema=False)
+def officer_redirect():
+    return RedirectResponse(url="/officer/officer.html")
+
+@app.get("/citizen", include_in_schema=False)
+def citizen_redirect():
+    return RedirectResponse(url="/citizen/")
+
 
 @app.get("/", response_class=HTMLResponse, tags=["Navigation"])
 def home_page():

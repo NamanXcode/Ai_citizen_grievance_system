@@ -1,6 +1,7 @@
-const API_URL = window.location.port === "8000"
+const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || !window.location.hostname;
+const API_URL = (!isLocalhost || window.location.port === "8000")
     ? window.location.origin
-    : (window.location.hostname ? `${window.location.protocol}//${window.location.hostname}:8000` : "http://127.0.0.1:8000");
+    : "http://127.0.0.1:8000";
 
 const form = document.getElementById("complaintForm");
 const result = document.getElementById("result");

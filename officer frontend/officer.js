@@ -1,9 +1,10 @@
-const AUTH_API = window.location.port === "8000"
+const isLocalhost = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || !window.location.hostname;
+const AUTH_API = (!isLocalhost || window.location.port === "8000")
     ? window.location.origin
-    : (window.location.hostname ? `${window.location.protocol}//${window.location.hostname}:8002` : "http://127.0.0.1:8002");
-const OFFICER_API = window.location.port === "8000"
+    : "http://127.0.0.1:8002";
+const OFFICER_API = (!isLocalhost || window.location.port === "8000")
     ? window.location.origin
-    : (window.location.hostname ? `${window.location.protocol}//${window.location.hostname}:8001` : "http://127.0.0.1:8001");
+    : "http://127.0.0.1:8001";
 
 let accessToken = null;
 let complaints = [];
