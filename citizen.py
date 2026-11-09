@@ -1,0 +1,18 @@
+print("====Citizen registraion====")
+
+name = input("Enter your name: ")
+age = input("Enter your age: ")
+gender = input("Enter your gender: ")
+city = input("Enter your city: ")
+PIN_code = input("enter your PIN code:")
+mobile = input("Enter your mobile number: ")
+email = input("Enter your email address: ")
+
+print("\n====Citizen Details====")
+print("Name:", name)
+print("Age:", age)
+print("Gender:", gender)
+print("City:", city)
+print("PIN Code:", PIN_code)
+print("Email Address:", email)
+print("Mobile Number:", mobile)

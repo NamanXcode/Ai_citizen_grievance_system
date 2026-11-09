@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citizen Grievance System | Officer Dashboard</title>
+    <link rel="stylesheet" href="officer.css">
+</head>
+<body>
+
+    <div class="login-container" id="loginSection">
+        <div class="login-card">
+            <h1>Citizen Grievance System</h1>
+            <p>Officer Portal</p>
+
+            <form id="loginForm">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter username" required>
+
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter password" required>
+
+                <button type="submit" id="loginButton">Login</button>
+            </form>
+
+            <p id="loginMessage"></p>
+        </div>
+    </div>
+
+    <div class="dashboard" id="dashboardSection" hidden>
+        <header class="topbar">
+            <div>
+                <h2>Citizen Grievance System</h2>
+                <p>Officer Dashboard</p>
+            </div>
+
+            <div class="officer-info">
+                <span id="officerName"></span>
+                <button id="logoutButton">Logout</button>
+            </div>
+        </header>
+
+        <main class="dashboard-content">
+            <h1>Department complaints</h1>
+            <p id="departmentName"></p>
+
+            <!-- STATISTICS CODE -->
+             <div class="stats-container">
+
+                <div class="stat-card total-card">
+                    <h3>Total Complaints</h3>
+                    <p id="totalCount">0</p>
+                </div>
+
+                <div class="stat-card pending-card">
+                    <h3>Pending</h3>
+                    <p id="pendingCount">0</p>
+                </div>
+
+                <div class="stat-card progress-card">
+                    <h3>In Progress</h3>
+                    <p id="progressCount">0</p>
+                </div>
+
+                <div class="stat-card resolved-card">
+                    <h3>Resolved</h3>
+                    <p id="resolvedCount">0</p>
+                </div>
+
+             </div>
+
+            <div class="filters">
+                <select id="statusFilter">
+                    <option value="All">All Statuses</option>
+                    <option value="Pending">Pending</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Resolved">Resolved</option>
+                </select>
+
+                <select id="priorityFilter">
+                    <option value="All">All Priorities</option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
+                </select>
+
+                <button id="refreshButton">Refresh Complaints</button>
+            </div>
+
+            <p id="dashboardMessage"></p>
+
+            <div class="complaints-container" id="complaintsContainer">
+                <!-- Complaints will appear here -->
+            </div>
+        </main>
+    </div>
+
+    <script src="officer.js"></script>
+
+</body>
+</html>

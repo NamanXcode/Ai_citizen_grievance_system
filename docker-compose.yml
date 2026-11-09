@@ -1,0 +1,61 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: grievance_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: citizen_portal
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d citizen_portal"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: grievance_api
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: citizen_portal
+      DB_USER: postgres
+      DB_PASSWORD: Password
+      SECRET_KEY: citizen_portal_super_secret_jwt_key_2026
+    ports:
+      - "8000:8000"
+      - "8001:8000"
+      - "8002:8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  frontend:
+    image: nginx:alpine
+    container_name: grievance_frontend
+    restart: unless-stopped
+    ports:
+      - "5500:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./frontend:/usr/share/nginx/html/citizen:ro
+      - "./officer frontend:/usr/share/nginx/html/officer:ro"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

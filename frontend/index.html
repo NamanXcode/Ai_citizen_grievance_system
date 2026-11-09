@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="container">
+        <h1>Citizen Grievance Portal</h1>
+        <p>Report your public service issue with AI assistance</p>
+
+        <form id="complaintForm">
+            <label for="citizenId">Citizen ID</label>
+            <input
+            type="number"
+            id="citizenId"
+            min="1"
+            required
+            placeholder="Enter your citizen ID"
+            >
+
+            <label for="complaint">Describe your complaint</label>
+            <textarea
+            id="complaint"
+            minlength="10"
+            maxlength="500"
+            required
+            placeholder="Describe the issue in detail..."
+            ></textarea>
+
+            <button type="submit">Analyze Complaint</button>
+        </form>
+
+        <section id="result" hidden aria-live="polite">
+            <h2>Complaint Review</h2>
+            <p id="department"></p>
+            <p id="priority"></p>
+            <p id="probability"></p>
+            <p id="message"></p>
+
+            <button id="confirmButton" type="button">
+                Confirm and Submit
+            </button>
+            <button id="cancelButton" type="button" class="secondary">
+                Cancel
+            </button>
+        </section>
+    </main>
+    
+    <script src="script.js"></script>
+</body>
+</html>
