@@ -24,7 +24,8 @@ ENV PYTHONUNBUFFERED=1 \
     DB_PORT=5432 \
     DB_NAME=citizen_portal \
     DB_USER=postgres \
-    DB_PASSWORD=Password
+    DB_PASSWORD=Password \
+    PORT=8000
 
-# Start the unified backend application
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Start unified application, respecting dynamic cloud host PORT if provided
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}"]

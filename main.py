@@ -50,6 +50,22 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.on_event("startup")
+def on_startup():
+    init_sql_path = os.path.join(BASE_DIR, "init.sql")
+    if os.path.exists(init_sql_path):
+        try:
+            conn = connect_database()
+            with open(init_sql_path, "r", encoding="utf-8") as f:
+                sql_content = f.read()
+            with conn.cursor() as cur:
+                cur.execute(sql_content)
+            conn.commit()
+            conn.close()
+            print("Auto-initialization: Database verified and ready.")
+        except Exception as exc:
+            print("Auto-initialization notice:", exc)
+
 bearer_scheme = HTTPBearer(auto_error=False)
 
 
